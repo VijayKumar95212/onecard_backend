@@ -1,0 +1,357 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "OneCard + Product API",
+    "version": "1.0.0",
+    "description": "Corrected API documentation"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8597",
+      "description": "Local Server"
+    }
+  ],
+  "paths": {
+
+  
+
+    "/api/CreateUser": {
+      "post": {
+        "summary": "Create new user",
+        "tags": ["Users"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateUser" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "User created" },
+          "400": { "description": "User already exists" }
+        }
+      }
+    },
+
+    "/api/login": {
+      "post": {
+        "summary": "Login with email & password",
+        "tags": ["Users"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginUser" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Login successful" },
+          "401": { "description": "Invalid credentials" }
+        }
+      }
+    },
+
+    "/api/loginwithuser": {
+      "post": {
+        "summary": "Login with username & password",
+        "tags": ["Users"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginWithUsername" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Login successful" }
+        }
+      }
+    },
+
+    "/api/getbyid/{id}": {
+      "get": {
+        "summary": "Get user by ID",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "User found" }
+        }
+      }
+    },
+
+    "/api/update/{id}": {
+      "put": {
+        "summary": "Update user profile",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateUser" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "User updated" }
+        }
+      }
+    },
+
+    "/api/deleteuser/{id}": {
+      "delete": {
+        "summary": "Delete user",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "User deleted" }
+        }
+      }
+    },
+
+    "/api/logout/{id}": {
+      "post": {
+        "summary": "Logout user",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Logout successful" }
+        }
+      }
+    },
+
+    "/api/upload-avatar/{id}": {
+      "post": {
+        "summary": "Upload user avatar",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "avatar": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Avatar uploaded" }
+        }
+      }
+    },
+
+    "/api/product/itemcreate": {
+      "post": {
+        "summary": "Create product",
+        "tags": ["Products"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": { "$ref": "#/components/schemas/CreateProduct" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Product created" }
+        }
+      }
+    },
+
+    "/api/product/productbyId/{id}": {
+      "get": {
+        "summary": "Get product by ID",
+        "tags": ["Products"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Product found" }
+        }
+      }
+    },
+
+    "/api/product/productupdate/{id}": {
+      "put": {
+        "summary": "Update product",
+        "tags": ["Products"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": { "$ref": "#/components/schemas/UpdateProduct" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Product updated" }
+        }
+      }
+    },
+
+    "/api/product/deleteproduct/{id}": {
+      "delete": {
+        "summary": "Delete product",
+        "tags": ["Products"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Product deleted" }
+        }
+      }
+    },
+
+    "/api/product/listproducts": {
+      "get": {
+        "summary": "List all products",
+        "tags": ["Products"],
+        "responses": {
+          "200": { "description": "Product list" }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "schemas": {
+
+      "CreateUser": {
+        "type": "object",
+        "required": ["username", "email", "password"],
+        "properties": {
+          "name": { "type": "string" },
+          "username": { "type": "string" },
+          "email": { "type": "string" },
+          "password": { "type": "string" }
+        }
+      },
+
+      "LoginUser": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": { "type": "string" },
+          "password": { "type": "string" }
+        }
+      },
+
+      "LoginWithUsername": {
+        "type": "object",
+        "required": ["username", "password"],
+        "properties": {
+          "username": { "type": "string" },
+          "password": { "type": "string" }
+        }
+      },
+
+      "UpdateUser": {
+        "type": "object",
+        "properties": {
+          "username": { "type": "string" },
+          "name": { "type": "string" },
+          "email": { "type": "string" }
+        }
+      },
+
+      "CreateProduct": {
+        "type": "object",
+        "required": ["name", "price", "category", "description", "image"],
+        "properties": {
+          "name": { "type": "string" },
+          "price": { "type": "number" },
+          "description": { "type": "string" },
+          "category": { "type": "string" },
+          "brand": { "type": "string" },
+          "stock": { "type": "integer" },
+          "ratings": { "type": "integer" },
+          "discount": { "type": "number" },
+          "weight": { "type": "string" },
+          "color": { "type": "string" },
+          "material": { "type": "string" },
+          "suppliername": { "type": "string" },
+          "image": {
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+
+      "UpdateProduct": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "price": { "type": "number" },
+          "stock": { "type": "number" },
+          "image": {
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      }
+    }
+  }
+}
