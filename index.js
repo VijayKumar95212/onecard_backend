@@ -72,7 +72,9 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const path = require("path");
 
-// Local imports
+// =======================
+// LOCAL IMPORTS
+// =======================
 const dbConnection = require("./db");
 const OneCardRouter = require("./router/oneCardUser");
 const ProductRouter = require("./router/Product");
@@ -85,7 +87,8 @@ dotenv.config();
 // =======================
 app.use(express.json());
 
-// ✅ CORS (Swagger + Browser + Postman + Curl SAFE)
+// ✅ CORS (Swagger + Browser + Postman + Curl)
+// ❌ NO app.options("*") → Node 22 crash fix
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -108,9 +111,6 @@ app.use(
   })
 );
 
-// 🔥 REQUIRED for Swagger preflight
-app.options("*", cors());
-
 // =======================
 // STATIC FILES
 // =======================
@@ -120,7 +120,7 @@ app.use(
 );
 
 // =======================
-// TEST ROUTE
+// HEALTH CHECK
 // =======================
 app.get("/", (req, res) => {
   res.send("OneCard Backend is running 🚀");
