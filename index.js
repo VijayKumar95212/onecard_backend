@@ -34,6 +34,6 @@ setupSwagger(app);
 
 
 app.listen(PORT,()=>{
-    console.log(`server is running on http://localhost:${PORT}`)
+    console.log(`server is running on https://localhost:${PORT}`)
     dbConnection();
 })

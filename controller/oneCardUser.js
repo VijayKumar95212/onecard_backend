@@ -145,15 +145,15 @@ const getbyid = async (req, res) => {
 };
 
 const update = async (req, res) => {
-  const { username, phone, email } = req.body;
+  const { username, name, email } = req.body;
 
-  if (!username || !phone || !email)
+  if (!username || !name || !email)
     return res.status(400).json({ message: "All fields are required" });
 
   try {
     const updatedUser = await OneCard.findByIdAndUpdate(
       req.params.id,
-      { username,phone, email },
+      { username,name, email },
       { new: true }
     );
 

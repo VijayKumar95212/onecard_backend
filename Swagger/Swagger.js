@@ -7,5 +7,5 @@ const swaggerDocument = JSON.parse(fs.readFileSync(path.join(__dirname, "Swagger
 
 module.exports = function(app) {
     app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-    console.log("Swagger url:http://localhost:8597/api-docs");
+    console.log("Swagger url:https://localhost:8597/api-docs");
 }
