@@ -5,16 +5,19 @@
     "version": "1.0.0",
     "description": "Corrected API documentation"
   },
+
   "servers": [
     {
-      "url": "https://localhost:8597",
+      "url": "http://localhost:8597",
       "description": "Local Server"
+    },
+    {
+      "url": "https://onecard-backend-myog.onrender.com",
+      "description": "Production Server"
     }
   ],
+
   "paths": {
-
-  
-
     "/api/CreateUser": {
       "post": {
         "summary": "Create new user",
@@ -278,7 +281,6 @@
 
   "components": {
     "schemas": {
-
       "CreateUser": {
         "type": "object",
         "required": ["username", "email", "password"],

@@ -1,39 +1,66 @@
 const express = require("express");
 const app = express();
-const dbConnection = require("./db")
 const dotenv = require("dotenv");
-const OneCardRouter = require("./router/oneCardUser");
-const ProductRouter = require("./router/Product");
 const cors = require("cors");
-const setupSwagger = require("./Swagger/Swagger");
 const path = require("path");
 
+// Local imports
+const dbConnection = require("./db");
+const OneCardRouter = require("./router/oneCardUser");
+const ProductRouter = require("./router/Product");
+const setupSwagger = require("./Swagger/Swagger");
 
-dotenv.config()
+dotenv.config();
+
+// =======================
+// MIDDLEWARES
+// =======================
 app.use(express.json());
-const PORT = process.env.PORT;
 
-app.get('/',(req,res)=>{
-    res.send("hello")
-})
-app.use(cors({
-    origin: "http://localhost:5173",
-    methods: "GET,POST,PUT,DELETE",
-    credentials:true
-}));
+// ✅ CORS FIX (Local + Production)
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://onecard-backend-myog.onrender.com"
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+  })
+);
 
+// =======================
+// STATIC FILES
+// =======================
 app.use(
   "/uploads",
   express.static(path.join(__dirname, "assets/image"))
 );
-app.use("/api",OneCardRouter);
-app.use("/api/product",ProductRouter);
+
+// =======================
+// TEST ROUTE
+// =======================
+app.get("/", (req, res) => {
+  res.send("OneCard Backend is running 🚀");
+});
+
+// =======================
+// ROUTES
+// =======================
+app.use("/api", OneCardRouter);
+app.use("/api/product", ProductRouter);
+
+// =======================
+// SWAGGER
+// =======================
 setupSwagger(app);
 
+// =======================
+// SERVER START
+// =======================
+const PORT = process.env.PORT || 8597;
 
-
-
-app.listen(PORT,()=>{
-    console.log(`server is running on https://localhost:${PORT}`)
-    dbConnection();
-})
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+  dbConnection();
+});
