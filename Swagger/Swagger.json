@@ -3,19 +3,18 @@
   "info": {
     "title": "OneCard + Product API",
     "version": "1.0.0",
-    "description": "Corrected API documentation"
+    "description": "OneCard backend API documentation"
   },
-
- "servers": [
-  {
-    "url": "http://localhost:8597",
-    "description": "Local Server (use only with local Swagger)"
-  },
-  {
-    "url": "https://onecard-backend-myog.onrender.com",
-    "description": "Production Server"
-  }
-],
+  "servers": [
+    {
+      "url": "https://onecard-backend-myog.onrender.com",
+      "description": "Production Server"
+    },
+    {
+      "url": "http://localhost:8597",
+      "description": "Local Development Server"
+    }
+  ],
 
   "paths": {
     "/api/CreateUser": {
@@ -357,3 +356,4 @@
     }
   }
 }
+
