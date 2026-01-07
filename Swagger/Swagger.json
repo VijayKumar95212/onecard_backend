@@ -6,16 +6,16 @@
     "description": "Corrected API documentation"
   },
 
-  "servers": [
-    {
-      "url": "http://localhost:8597",
-      "description": "Local Server"
-    },
-    {
-      "url": "https://onecard-backend-myog.onrender.com",
-      "description": "Production Server"
-    }
-  ],
+ "servers": [
+  {
+    "url": "http://localhost:8597",
+    "description": "Local Server (use only with local Swagger)"
+  },
+  {
+    "url": "https://onecard-backend-myog.onrender.com",
+    "description": "Production Server"
+  }
+],
 
   "paths": {
     "/api/CreateUser": {
