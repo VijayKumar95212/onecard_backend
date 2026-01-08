@@ -96,8 +96,7 @@ app.use(
 
       const allowedOrigins = [
         "http://localhost:5173",
-        "http://localhost:8597",
-        "https://onecard-backend-myog.onrender.com"
+        "hhttps://vijay-one-card-project.vercel.app/"
       ];
 
       if (allowedOrigins.includes(origin)) {
