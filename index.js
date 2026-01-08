@@ -83,32 +83,35 @@ const setupSwagger = require("./Swagger/Swagger");
 dotenv.config();
 
 // =======================
+// 🔥 CORS — MUST BE FIRST
+// =======================
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://vijay-one-card-project.vercel.app"
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
+  })
+);
+
+// ✅ Explicit preflight handler (Render-safe)
+app.use((req, res, next) => {
+  if (req.method === "OPTIONS") {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
+
+// =======================
 // MIDDLEWARES
 // =======================
 app.use(express.json());
-
-// ✅ CORS (Swagger + Browser + Postman + Curl)
-// ❌ NO app.options("*") → Node 22 crash fix
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-
-      const allowedOrigins = [
-        "http://localhost:5173",
-        "hhttps://vijay-one-card-project.vercel.app/"
-      ];
-
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"]
-  })
-);
 
 // =======================
 // STATIC FILES
