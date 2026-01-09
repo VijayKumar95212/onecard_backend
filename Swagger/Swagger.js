@@ -20,7 +20,7 @@
 
 // module.exports = function (app) {
 //   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-//   console.log("Swagger url: http://localhost:8597/api-docs");
+//   console.log("Swagger url: https://onecard-backend.onrender.com/api-docs");
 // };
 
 

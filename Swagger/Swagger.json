@@ -11,7 +11,7 @@
       "description": "Production Server"
     },
     {
-      "url": "http://localhost:8597",
+      "url": "https://onecard-backend.onrender.com",
       "description": "Local Development Server"
     }
   ],
